@@ -1,7 +1,0 @@
-+====================+===================+==============================+
-| Launch Setup Clock | Launch Hold Clock | Pin                          |
-+====================+===================+==============================+
-| SysClk             | SysClk            | u_div_clk/r_clk_b_reg/D      |
-| SysClk             | SysClk            | u_div_clk/r_clk_a_reg/D      |
-| SysClk             | SysClk            | u_div_clk/r_div_cnt_reg[0]/D |
-+--------------------+-------------------+------------------------------+

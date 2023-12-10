@@ -8,8 +8,8 @@
   <device name="xc7a35t_0" gui_info="dashboard1=hw_ila_1[xc7a35t_0/hw_ila_1/Settings=ILA_SETTINGS_1;xc7a35t_0/hw_ila_1/Status=ILA_STATUS_1;xc7a35t_0/hw_ila_1/Trigger Setup=ILA_TRIGGER_1;xc7a35t_0/hw_ila_1/Waveform=ILA_WAVE_1;xc7a35t_0/hw_ila_1/Capture Setup=ILA_CAPTURE_1;]"/>
   <ObjectList object_type="hw_device" gui_info="">
     <Object name="xc7a35t_0" gui_info="">
-      <Properties Property="FULL_PROBES.FILE" value=""/>
-      <Properties Property="PROBES.FILE" value=""/>
+      <Properties Property="FULL_PROBES.FILE" value="$_project_name_.runs/impl_2/top.ltx"/>
+      <Properties Property="PROBES.FILE" value="$_project_name_.runs/impl_2/top.ltx"/>
       <Properties Property="PROGRAM.HW_BITSTREAM" value="$_project_name_.runs/impl_2/top.bit"/>
       <Properties Property="SLR.COUNT" value="1"/>
     </Object>
@@ -19,6 +19,141 @@
       <Properties Property="CONTROL.TRIGGER_CONDITION" value="AND"/>
       <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
     </Object>
+    <Object name="u_ila" gui_info="">
+      <Properties Property="CONTROL.TRIGGER_CONDITION" value="AND"/>
+      <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
+    </Object>
+    <Object name="u_ila_0" gui_info="">
+      <Properties Property="CONTROL.TRIGGER_CONDITION" value="AND"/>
+      <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
+    </Object>
+    <Object name="your_instance_name" gui_info="">
+      <Properties Property="CONTROL.TRIGGER_CONDITION" value="AND"/>
+      <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
+    </Object>
   </ObjectList>
-  <probeset name="hw project" active="false"/>
+  <ObjectList object_type="hw_probe" gui_info="">
+    <Object name="o_div_clk" gui_info=""/>
+    <Object name="r_freq_num[27:0]" gui_info=""/>
+    <Object name="w_freq[27:0]" gui_info=""/>
+  </ObjectList>
+  <probeset name="hw project" active="false">
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq1&apos;bX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="DISPLAY_AS_ENUM" value="1"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_RADIX" value="HEX"/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="LINK_TO_WAVEFORM" value="1"/>
+        <Option Id="MAP" value="probe2[0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq1&apos;bX"/>
+        <Option Id="WAVEFORM_STYLE" value="Digital"/>
+      </probeOptions>
+      <nets>
+        <net name="o_div_clk"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq28&apos;hXXX_XXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq28&apos;hXXX_XXXX"/>
+        <Option Id="DISPLAY_AS_ENUM" value="1"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_RADIX" value="UNSIGNED"/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="LINK_TO_WAVEFORM" value="1"/>
+        <Option Id="MAP" value="probe0[27:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq28&apos;hXXX_XXXX"/>
+        <Option Id="WAVEFORM_STYLE" value="Digital"/>
+      </probeOptions>
+      <nets>
+        <net name="r_freq_num[27]"/>
+        <net name="r_freq_num[26]"/>
+        <net name="r_freq_num[25]"/>
+        <net name="r_freq_num[24]"/>
+        <net name="r_freq_num[23]"/>
+        <net name="r_freq_num[22]"/>
+        <net name="r_freq_num[21]"/>
+        <net name="r_freq_num[20]"/>
+        <net name="r_freq_num[19]"/>
+        <net name="r_freq_num[18]"/>
+        <net name="r_freq_num[17]"/>
+        <net name="r_freq_num[16]"/>
+        <net name="r_freq_num[15]"/>
+        <net name="r_freq_num[14]"/>
+        <net name="r_freq_num[13]"/>
+        <net name="r_freq_num[12]"/>
+        <net name="r_freq_num[11]"/>
+        <net name="r_freq_num[10]"/>
+        <net name="r_freq_num[9]"/>
+        <net name="r_freq_num[8]"/>
+        <net name="r_freq_num[7]"/>
+        <net name="r_freq_num[6]"/>
+        <net name="r_freq_num[5]"/>
+        <net name="r_freq_num[4]"/>
+        <net name="r_freq_num[3]"/>
+        <net name="r_freq_num[2]"/>
+        <net name="r_freq_num[1]"/>
+        <net name="r_freq_num[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq28&apos;hXXX_XXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq28&apos;hXXX_XXXX"/>
+        <Option Id="DISPLAY_AS_ENUM" value="1"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_RADIX" value="UNSIGNED"/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="LINK_TO_WAVEFORM" value="1"/>
+        <Option Id="MAP" value="probe1[27:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq28&apos;hXXX_XXXX"/>
+        <Option Id="WAVEFORM_STYLE" value="Digital"/>
+      </probeOptions>
+      <nets>
+        <net name="w_freq[27]"/>
+        <net name="w_freq[26]"/>
+        <net name="w_freq[25]"/>
+        <net name="w_freq[24]"/>
+        <net name="w_freq[23]"/>
+        <net name="w_freq[22]"/>
+        <net name="w_freq[21]"/>
+        <net name="w_freq[20]"/>
+        <net name="w_freq[19]"/>
+        <net name="w_freq[18]"/>
+        <net name="w_freq[17]"/>
+        <net name="w_freq[16]"/>
+        <net name="w_freq[15]"/>
+        <net name="w_freq[14]"/>
+        <net name="w_freq[13]"/>
+        <net name="w_freq[12]"/>
+        <net name="w_freq[11]"/>
+        <net name="w_freq[10]"/>
+        <net name="w_freq[9]"/>
+        <net name="w_freq[8]"/>
+        <net name="w_freq[7]"/>
+        <net name="w_freq[6]"/>
+        <net name="w_freq[5]"/>
+        <net name="w_freq[4]"/>
+        <net name="w_freq[3]"/>
+        <net name="w_freq[2]"/>
+        <net name="w_freq[1]"/>
+        <net name="w_freq[0]"/>
+      </nets>
+    </probe>
+  </probeset>
 </hwsession>

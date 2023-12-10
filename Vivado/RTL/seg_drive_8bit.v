@@ -6,7 +6,7 @@ module seg_drive_8bit#(
 	input	wire	clk,
 	input	wire	rstn,
 	input	wire	[31:0]	i_data,
-	
+	input	wire	[2:0]	i_sw_state,
 	output	wire	[7:0]	o_seg_pos,
 	output	wire	[7:0]	o_seg
 );
@@ -20,7 +20,7 @@ reg	r_clear;
 reg	[7:0]	r_seg;
 
 assign	o_seg_pos = r_seg_pos;
-assign	o_seg = r_seg;
+assign	o_seg = o_seg_pos[i_sw_state] == 'b1 ? (r_seg | 'h80) : r_seg;
 
 /* counter */
 always@(posedge clk or negedge rstn)

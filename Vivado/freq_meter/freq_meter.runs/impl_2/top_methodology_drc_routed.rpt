@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-| Date         : Sun Dec 10 14:27:39 2023
+| Date         : Sun Dec 10 17:11:58 2023
 | Host         : LAPTOP-B536QLCF running 64-bit major release  (build 9200)
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -23,16 +23,18 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 317
-+-----------+------------------+-------------------------------+------------+
-| Rule      | Severity         | Description                   | Violations |
-+-----------+------------------+-------------------------------+------------+
-| TIMING-17 | Critical Warning | Non-clocked sequential cell   | 99         |
-| DPIR-1    | Warning          | Asynchronous driver check     | 96         |
-| SYNTH-10  | Warning          | Wide multiplier               | 6          |
-| TIMING-16 | Warning          | Large setup violation         | 86         |
-| TIMING-18 | Warning          | Missing input or output delay | 30         |
-+-----------+------------------+-------------------------------+------------+
+             Violations found: 333
++-----------+------------------+-------------------------------------------------+------------+
+| Rule      | Severity         | Description                                     | Violations |
++-----------+------------------+-------------------------------------------------+------------+
+| TIMING-17 | Critical Warning | Non-clocked sequential cell                     | 99         |
+| DPIR-1    | Warning          | Asynchronous driver check                       | 96         |
+| LUTAR-1   | Warning          | LUT drives async reset alert                    | 4          |
+| PDRC-190  | Warning          | Suboptimally placed synchronized register chain | 10         |
+| SYNTH-10  | Warning          | Wide multiplier                                 | 6          |
+| TIMING-16 | Warning          | Large setup violation                           | 86         |
+| TIMING-18 | Warning          | Missing input or output delay                   | 32         |
++-----------+------------------+-------------------------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
@@ -1011,6 +1013,84 @@ Asynchronous driver check
 DSP u_freq_meter_calc/freq_reg1__4 input pin u_freq_meter_calc/freq_reg1__4/B[9] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
 Related violations: <none>
 
+LUTAR-1#1 Warning
+LUT drives async reset alert  
+LUT cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst/ngwrdrst.grst.g7serrst.rd_rst_reg[2]_i_1, with 2 or more inputs, drives asynchronous preset/clear pin(s) dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[0]/PRE,
+dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1]/PRE
+dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+LUTAR-1#2 Warning
+LUT drives async reset alert  
+LUT cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst/ngwrdrst.grst.g7serrst.wr_rst_reg[2]_i_1, with 2 or more inputs, drives asynchronous preset/clear pin(s) dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0]/PRE,
+dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1]/PRE
+dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[2]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+LUTAR-1#3 Warning
+LUT drives async reset alert  
+LUT cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst/ngwrdrst.grst.g7serrst.rd_rst_reg[2]_i_1, with 2 or more inputs, drives asynchronous preset/clear pin(s) dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[0]/PRE,
+dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1]/PRE
+dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+LUTAR-1#4 Warning
+LUT drives async reset alert  
+LUT cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst/ngwrdrst.grst.g7serrst.wr_rst_reg[2]_i_1, with 2 or more inputs, drives asynchronous preset/clear pin(s) dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0]/PRE,
+dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1]/PRE
+dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[2]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+PDRC-190#1 Warning
+Suboptimally placed synchronized register chain  
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[0] in site SLICE_X38Y50 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[0] is not placed in the same (SLICE) site.
+Related violations: <none>
+
+PDRC-190#2 Warning
+Suboptimally placed synchronized register chain  
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[1] in site SLICE_X38Y54 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[1] is not placed in the same (SLICE) site.
+Related violations: <none>
+
+PDRC-190#3 Warning
+Suboptimally placed synchronized register chain  
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[2] in site SLICE_X39Y55 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[2] is not placed in the same (SLICE) site.
+Related violations: <none>
+
+PDRC-190#4 Warning
+Suboptimally placed synchronized register chain  
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[3] in site SLICE_X39Y51 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[3] is not placed in the same (SLICE) site.
+Related violations: <none>
+
+PDRC-190#5 Warning
+Suboptimally placed synchronized register chain  
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_reg[0] in site SLICE_X37Y54 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_1_reg[0] is not placed in the same (SLICE) site.
+Related violations: <none>
+
+PDRC-190#6 Warning
+Suboptimally placed synchronized register chain  
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_reg[1] in site SLICE_X35Y53 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_1_reg[1] is not placed in the same (SLICE) site.
+Related violations: <none>
+
+PDRC-190#7 Warning
+Suboptimally placed synchronized register chain  
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_reg[2] in site SLICE_X34Y53 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_1_reg[2] is not placed in the same (SLICE) site.
+Related violations: <none>
+
+PDRC-190#8 Warning
+Suboptimally placed synchronized register chain  
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[0] in site SLICE_X35Y57 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_1_reg[0] is not placed in the same (SLICE) site.
+Related violations: <none>
+
+PDRC-190#9 Warning
+Suboptimally placed synchronized register chain  
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[1] in site SLICE_X34Y55 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_1_reg[1] is not placed in the same (SLICE) site.
+Related violations: <none>
+
+PDRC-190#10 Warning
+Suboptimally placed synchronized register chain  
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[2] in site SLICE_X36Y57 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_1_reg[2] is not placed in the same (SLICE) site.
+Related violations: <none>
+
 SYNTH-10#1 Warning
 Wide multiplier  
 Detected multiplier at u_freq_meter_calc/freq_reg1 of size 11x18, it is decomposed from a wide multipler into 6 DSP blocks.
@@ -1043,432 +1123,432 @@ Related violations: <none>
 
 TIMING-16#1 Warning
 Large setup violation  
-There is a large setup violation of -116.346 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[27]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.291 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[1]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#2 Warning
 Large setup violation  
-There is a large setup violation of -119.778 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[26]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.296 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[3]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#3 Warning
 Large setup violation  
-There is a large setup violation of -123.196 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[25]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.343 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[0]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#4 Warning
 Large setup violation  
-There is a large setup violation of -126.724 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[24]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.345 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[2]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#5 Warning
 Large setup violation  
-There is a large setup violation of -130.060 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[23]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.442 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[11]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#6 Warning
 Large setup violation  
-There is a large setup violation of -133.513 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[22]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.447 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[13]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#7 Warning
 Large setup violation  
-There is a large setup violation of -136.827 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[21]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.494 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[10]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#8 Warning
 Large setup violation  
-There is a large setup violation of -140.322 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[20]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.496 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[12]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#9 Warning
 Large setup violation  
-There is a large setup violation of -143.843 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[19]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.547 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[7]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#10 Warning
 Large setup violation  
-There is a large setup violation of -147.254 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[18]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.567 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[6]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#11 Warning
 Large setup violation  
-There is a large setup violation of -150.071 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[17]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.601 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[15]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#12 Warning
 Large setup violation  
-There is a large setup violation of -153.527 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[16]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.606 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[17]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#13 Warning
 Large setup violation  
-There is a large setup violation of -157.168 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[15]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.653 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[14]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#14 Warning
 Large setup violation  
-There is a large setup violation of -160.447 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[14]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.655 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[16]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#15 Warning
 Large setup violation  
-There is a large setup violation of -163.715 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[13]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.718 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[9]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#16 Warning
 Large setup violation  
-There is a large setup violation of -167.161 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[12]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.721 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[5]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#17 Warning
 Large setup violation  
-There is a large setup violation of -170.492 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[11]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.735 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[4]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#18 Warning
 Large setup violation  
-There is a large setup violation of -173.775 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[10]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.736 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[8]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#19 Warning
 Large setup violation  
-There is a large setup violation of -177.195 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[9]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.746 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[19]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#20 Warning
 Large setup violation  
-There is a large setup violation of -180.480 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[8]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.798 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[18]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#21 Warning
 Large setup violation  
-There is a large setup violation of -183.846 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[7]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.911 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[23]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#22 Warning
 Large setup violation  
-There is a large setup violation of -187.391 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[6]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -102.963 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[22]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#23 Warning
 Large setup violation  
-There is a large setup violation of -190.718 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[5]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -103.017 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[21]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#24 Warning
 Large setup violation  
-There is a large setup violation of -194.079 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[4]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -103.033 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[20]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#25 Warning
 Large setup violation  
-There is a large setup violation of -197.354 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[3]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -103.085 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[25]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#26 Warning
 Large setup violation  
-There is a large setup violation of -200.788 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[2]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -103.134 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[24]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#27 Warning
 Large setup violation  
-There is a large setup violation of -204.134 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[1]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -103.510 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[27]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#28 Warning
 Large setup violation  
-There is a large setup violation of -207.453 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_7/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[0]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -103.524 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[26]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#29 Warning
 Large setup violation  
-There is a large setup violation of -90.149 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[9]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -104.080 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_clk_b_reg/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#30 Warning
 Large setup violation  
-There is a large setup violation of -90.154 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[2]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -114.426 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[27]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#31 Warning
 Large setup violation  
-There is a large setup violation of -90.201 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[10]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -117.912 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[26]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#32 Warning
 Large setup violation  
-There is a large setup violation of -90.203 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[1]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -121.337 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[25]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#33 Warning
 Large setup violation  
-There is a large setup violation of -90.532 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[12]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -124.933 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[24]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#34 Warning
 Large setup violation  
-There is a large setup violation of -90.541 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[11]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -128.267 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[23]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#35 Warning
 Large setup violation  
-There is a large setup violation of -90.590 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[6]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -131.685 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[22]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#36 Warning
 Large setup violation  
-There is a large setup violation of -90.590 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[8]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -135.247 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[21]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#37 Warning
 Large setup violation  
-There is a large setup violation of -90.604 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[5]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -138.340 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[20]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#38 Warning
 Large setup violation  
-There is a large setup violation of -90.608 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[7]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -141.496 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[19]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#39 Warning
 Large setup violation  
-There is a large setup violation of -90.703 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[16]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -144.948 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[18]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#40 Warning
 Large setup violation  
-There is a large setup violation of -90.755 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[15]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -148.422 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[17]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#41 Warning
 Large setup violation  
-There is a large setup violation of -90.970 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[4]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -151.862 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[16]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#42 Warning
 Large setup violation  
-There is a large setup violation of -90.988 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[3]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -155.446 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[15]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#43 Warning
 Large setup violation  
-There is a large setup violation of -91.025 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[14]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -158.793 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[14]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#44 Warning
 Large setup violation  
-There is a large setup violation of -91.030 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[20]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -162.006 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[13]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#45 Warning
 Large setup violation  
-There is a large setup violation of -91.077 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[13]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -165.475 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[12]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#46 Warning
 Large setup violation  
-There is a large setup violation of -91.079 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[19]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -168.735 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[11]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#47 Warning
 Large setup violation  
-There is a large setup violation of -91.102 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[24]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -172.032 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[10]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#48 Warning
 Large setup violation  
-There is a large setup violation of -91.122 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[23]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -175.444 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[9]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#49 Warning
 Large setup violation  
-There is a large setup violation of -91.227 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[18]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -178.762 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[8]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#50 Warning
 Large setup violation  
-There is a large setup violation of -91.244 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[17]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -181.919 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[7]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#51 Warning
 Large setup violation  
-There is a large setup violation of -91.443 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[27]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -185.325 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[6]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#52 Warning
 Large setup violation  
-There is a large setup violation of -91.459 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[0]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -188.742 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[5]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#53 Warning
 Large setup violation  
-There is a large setup violation of -91.466 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[22]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -192.059 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[4]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#54 Warning
 Large setup violation  
-There is a large setup violation of -91.466 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[26]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -195.144 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[3]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#55 Warning
 Large setup violation  
-There is a large setup violation of -91.480 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[21]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -198.541 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[2]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#56 Warning
 Large setup violation  
-There is a large setup violation of -91.484 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[25]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -201.992 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[1]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#57 Warning
 Large setup violation  
-There is a large setup violation of -92.121 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_clk_a_reg/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -205.356 ns between u_freq_meter_calc/cnt_clk_stand_reg_reg[1]_replica_8/C (clocked by SysClk) and u_freq_meter_calc/freq_reg_reg[0]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#58 Warning
 Large setup violation  
-There is a large setup violation of -94.531 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[27]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.522 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[19]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#59 Warning
 Large setup violation  
-There is a large setup violation of -94.581 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[26]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.571 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[18]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#60 Warning
 Large setup violation  
-There is a large setup violation of -94.714 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[15]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.781 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[15]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#61 Warning
 Large setup violation  
-There is a large setup violation of -94.763 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[14]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.801 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[14]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#62 Warning
 Large setup violation  
-There is a large setup violation of -94.882 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[19]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.837 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[1]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#63 Warning
 Large setup violation  
-There is a large setup violation of -94.931 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[18]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.855 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[0]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#64 Warning
 Large setup violation  
-There is a large setup violation of -95.031 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[17]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.958 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[21]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#65 Warning
 Large setup violation  
-There is a large setup violation of -95.083 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[16]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.958 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[23]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#66 Warning
 Large setup violation  
-There is a large setup violation of -95.141 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[11]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.972 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[20]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#67 Warning
 Large setup violation  
-There is a large setup violation of -95.150 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[25]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.976 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[22]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#68 Warning
 Large setup violation  
-There is a large setup violation of -95.161 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[10]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.991 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[25]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#69 Warning
 Large setup violation  
-There is a large setup violation of -95.163 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[13]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -97.997 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[27]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#70 Warning
 Large setup violation  
-There is a large setup violation of -95.164 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[24]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.037 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[24]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#71 Warning
 Large setup violation  
-There is a large setup violation of -95.183 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[12]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.041 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[26]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#72 Warning
 Large setup violation  
-There is a large setup violation of -95.318 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[21]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.180 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[11]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#73 Warning
 Large setup violation  
-There is a large setup violation of -95.318 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[23]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.195 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[10]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#74 Warning
 Large setup violation  
-There is a large setup violation of -95.332 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[20]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.238 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[7]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#75 Warning
 Large setup violation  
-There is a large setup violation of -95.336 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[22]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.256 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[6]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#76 Warning
 Large setup violation  
-There is a large setup violation of -95.424 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[5]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.266 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[5]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#77 Warning
 Large setup violation  
-There is a large setup violation of -95.473 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[4]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.268 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[9]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#78 Warning
 Large setup violation  
-There is a large setup violation of -95.682 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[3]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.274 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[13]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#79 Warning
 Large setup violation  
-There is a large setup violation of -95.702 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[2]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.277 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[3]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#80 Warning
 Large setup violation  
-There is a large setup violation of -95.846 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[9]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.284 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[4]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#81 Warning
 Large setup violation  
-There is a large setup violation of -95.864 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[8]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.284 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[8]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#82 Warning
 Large setup violation  
-There is a large setup violation of -96.033 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[7]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.290 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[12]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#83 Warning
 Large setup violation  
-There is a large setup violation of -96.047 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[6]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.291 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[2]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#84 Warning
 Large setup violation  
-There is a large setup violation of -96.096 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[1]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.383 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[17]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#85 Warning
 Large setup violation  
-There is a large setup violation of -96.114 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_div_cnt1_reg[0]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -98.392 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_div_cnt_reg[16]/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#86 Warning
 Large setup violation  
-There is a large setup violation of -97.333 ns between r_freq_num_reg[3]/C (clocked by SysClk) and u_div_clk/r_clk_b_reg/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -99.491 ns between r_freq_num_reg[23]/C (clocked by SysClk) and u_div_clk/r_clk_a_reg/D (clocked by SysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-18#1 Warning
@@ -1498,125 +1578,135 @@ Related violations: <none>
 
 TIMING-18#6 Warning
 Missing input or output delay  
-An input delay is missing on rstn relative to the rising and/or falling clock edge(s) of SysClk.
+An input delay is missing on i_sw relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#7 Warning
 Missing input or output delay  
-An output delay is missing on o_seg1[0] relative to the rising and/or falling clock edge(s) of SysClk.
+An input delay is missing on rstn relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#8 Warning
 Missing input or output delay  
-An output delay is missing on o_seg1[1] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_led relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#9 Warning
 Missing input or output delay  
-An output delay is missing on o_seg1[2] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg1[0] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#10 Warning
 Missing input or output delay  
-An output delay is missing on o_seg1[3] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg1[1] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#11 Warning
 Missing input or output delay  
-An output delay is missing on o_seg1[4] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg1[2] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#12 Warning
 Missing input or output delay  
-An output delay is missing on o_seg1[5] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg1[3] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#13 Warning
 Missing input or output delay  
-An output delay is missing on o_seg1[6] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg1[4] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#14 Warning
 Missing input or output delay  
-An output delay is missing on o_seg1[7] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg1[5] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#15 Warning
 Missing input or output delay  
-An output delay is missing on o_seg2[0] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg1[6] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#16 Warning
 Missing input or output delay  
-An output delay is missing on o_seg2[1] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg1[7] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#17 Warning
 Missing input or output delay  
-An output delay is missing on o_seg2[2] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg2[0] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#18 Warning
 Missing input or output delay  
-An output delay is missing on o_seg2[3] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg2[1] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#19 Warning
 Missing input or output delay  
-An output delay is missing on o_seg2[4] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg2[2] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#20 Warning
 Missing input or output delay  
-An output delay is missing on o_seg2[5] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg2[3] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#21 Warning
 Missing input or output delay  
-An output delay is missing on o_seg2[6] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg2[4] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#22 Warning
 Missing input or output delay  
-An output delay is missing on o_seg2[7] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg2[5] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#23 Warning
 Missing input or output delay  
-An output delay is missing on o_seg_pos[0] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg2[6] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#24 Warning
 Missing input or output delay  
-An output delay is missing on o_seg_pos[1] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg2[7] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#25 Warning
 Missing input or output delay  
-An output delay is missing on o_seg_pos[2] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg_pos[0] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#26 Warning
 Missing input or output delay  
-An output delay is missing on o_seg_pos[3] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg_pos[1] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#27 Warning
 Missing input or output delay  
-An output delay is missing on o_seg_pos[4] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg_pos[2] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#28 Warning
 Missing input or output delay  
-An output delay is missing on o_seg_pos[5] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg_pos[3] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#29 Warning
 Missing input or output delay  
-An output delay is missing on o_seg_pos[6] relative to the rising and/or falling clock edge(s) of SysClk.
+An output delay is missing on o_seg_pos[4] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>
 
 TIMING-18#30 Warning
+Missing input or output delay  
+An output delay is missing on o_seg_pos[5] relative to the rising and/or falling clock edge(s) of SysClk.
+Related violations: <none>
+
+TIMING-18#31 Warning
+Missing input or output delay  
+An output delay is missing on o_seg_pos[6] relative to the rising and/or falling clock edge(s) of SysClk.
+Related violations: <none>
+
+TIMING-18#32 Warning
 Missing input or output delay  
 An output delay is missing on o_seg_pos[7] relative to the rising and/or falling clock edge(s) of SysClk.
 Related violations: <none>

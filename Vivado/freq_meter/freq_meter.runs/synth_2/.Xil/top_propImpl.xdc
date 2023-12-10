@@ -61,3 +61,7 @@ set_property src_info {type:XDC file:1 line:64 export:INPUT save:INPUT read:READ
 set_property PACKAGE_PIN V1 [get_ports {i_key[3]}]
 set_property src_info {type:XDC file:1 line:65 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN U4 [get_ports {i_key[4]}]
+set_property src_info {type:XDC file:1 line:68 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN K2 [get_ports {o_led}]
+set_property src_info {type:XDC file:1 line:71 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN R1 [get_ports {i_sw}]

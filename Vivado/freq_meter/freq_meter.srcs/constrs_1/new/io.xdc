@@ -64,5 +64,9 @@ set_property PACKAGE_PIN R15 [get_ports {i_key[2]}]
 set_property PACKAGE_PIN V1 [get_ports {i_key[3]}]
 set_property PACKAGE_PIN U4 [get_ports {i_key[4]}]
 
+set_property IOSTANDARD LVCMOS33 [get_ports {o_led}]
+set_property PACKAGE_PIN K2 [get_ports {o_led}]
 
+set_property IOSTANDARD LVCMOS33 [get_ports {i_sw}]
+set_property PACKAGE_PIN R1 [get_ports {i_sw}]
 create_clock	-name SysClk -period 10 -waveform {0 5} [get_ports clk]

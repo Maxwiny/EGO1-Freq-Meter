@@ -20,7 +20,7 @@ always#5 clk = ~clk;
 initial begin
 	rstn = 1;
 	i_sw = 0;
-	i_div_num = 1001;
+	i_div_num = 'd107_411;
 	#20;
 	rstn = 0;
 	#201

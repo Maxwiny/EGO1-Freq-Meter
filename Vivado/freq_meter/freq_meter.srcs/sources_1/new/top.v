@@ -4,20 +4,22 @@ module top(
 	input	wire	clk,
 	input	wire	rstn,
 	input	wire	[4:0]	i_key,
+	input	wire	i_sw,
 	
 	output	wire	[7:0]	o_seg_pos,
 	output	wire	[7:0]	o_seg1,
-	output	wire	[7:0]	o_seg2
+	output	wire	[7:0]	o_seg2,
+	output	wire	o_led
 );
 
-reg	[27:0]	r_freq_num;
+reg	[27:0]	r_freq_num;	//set freq
 reg	r_num_add_flag;
 reg	r_num_sub_flag;
 reg	[2:0]	r_step_mode;
 reg	r_mode;
 reg	[23:0]	r_step_value;
 reg	r_bin2bcd_en;
-wire	o_div_clk;
+wire	o_div_clk;	//squ out
 wire	w_key_val;
 wire	[4:0]	w_key;
 
@@ -41,8 +43,9 @@ assign o_seg2 = w_seg;
 
 /*bcd_sw*/
 reg	[27:0]	r_bcd_in;
-wire	[33:0]	w_freq;
+wire	[33:0]	w_freq;	//now freq
 
+assign o_led = r_mode;
 /*bcd_sw*/
 always@(posedge clk or negedge rstn)
 	if(rstn == 0) r_bcd_in <= #1 0;
@@ -114,7 +117,7 @@ always@(posedge	clk or negedge rstn)
 	
 div_clk u_div_clk(
 	.clk(clk),
-	.rstn(rstn),
+	.rstn(i_sw),
 	.i_freq_num(r_freq_num),
 	.i_sw(1),
 	.o_div_clk(o_div_clk)
@@ -152,7 +155,8 @@ seg_drive_8bit seg_isnt(
 	.rstn		(rstn),
 	.i_data		(r_bcd),
 	.o_seg_pos	(o_seg_pos),
-	.o_seg		(w_seg)
+	.o_seg		(w_seg),
+	.i_sw_state(r_step_mode)
 );   
 freq_meter_calc u_freq_meter_calc
 (
@@ -160,5 +164,13 @@ freq_meter_calc u_freq_meter_calc
     .sys_rst_n(rstn),   
     .clk_test(o_div_clk),   //´ý¼ì²âÊ±ÖÓ
     .freq(w_freq)            //´ý¼ì²âÊ±ÖÓÆµÂÊ
+);
+
+ila_0 u_ila (
+	.clk(clk), // input wire clk
+
+	.probe0(r_freq_num), // input wire [27:0]  probe0  
+	.probe1(w_freq[27:0]), // input wire [27:0]  probe1 
+	.probe2(o_div_clk) // input wire [0:0]  probe2
 );
 endmodule

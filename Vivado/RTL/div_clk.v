@@ -17,7 +17,7 @@ reg	r_clk_b;
 wire	w_div_type;	//0 even, 1 odd
 wire	[27:0]	w_div_num;
 
-assign	w_div_num = ('d100_000_000 / i_freq_num) >> 1;
+assign	w_div_num = 'd100_000_000 / i_freq_num;
 
 assign w_div_type = w_div_num[0];
 assign o_div_clk = r_clk_a | r_clk_b;
@@ -26,8 +26,13 @@ assign o_div_clk = r_clk_a | r_clk_b;
 always@(posedge clk or negedge rstn)
 	if(rstn == 0)begin
 		r_div_cnt <= #1 0;
-	end else if(i_sw == 1)begin
+	end 
+	else if(w_div_type == 1 && i_sw == 1)begin
 		if(r_div_cnt == w_div_num - 1) r_div_cnt <= #1 0;
+		else r_div_cnt <= #1 r_div_cnt + 'd1;
+	end 
+	else if(w_div_type == 0 && i_sw == 1)begin
+		if(r_div_cnt == w_div_num / 2 - 1) r_div_cnt <= #1 0;
 		else r_div_cnt <= #1 r_div_cnt + 'd1;
 	end 
 	else	r_div_cnt <= #1 0;
