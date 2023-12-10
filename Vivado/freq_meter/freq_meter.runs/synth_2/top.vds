@@ -1,0 +1,346 @@
+#-----------------------------------------------------------
+# Vivado v2023.1 (64-bit)
+# SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
+# IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+# SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+# Start of session at: Sun Dec 10 14:24:54 2023
+# Process ID: 16520
+# Current directory: C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.runs/synth_2
+# Command line: vivado.exe -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
+# Log file: C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.runs/synth_2/top.vds
+# Journal file: C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.runs/synth_2\vivado.jou
+# Running On: LAPTOP-B536QLCF, OS: Windows, CPU Frequency: 3194 MHz, CPU Physical cores: 16, Host memory: 33719 MB
+#-----------------------------------------------------------
+source top.tcl -notrace
+Command: read_checkpoint -auto_incremental -incremental C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.srcs/utils_1/imports/synth_2/top.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.srcs/utils_1/imports/synth_2/top.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top top -part xc7a35tcsg324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcsg324-1
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 17352
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2191.930 ; gain = 410.180
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'top' [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.srcs/sources_1/new/top.v:3]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.srcs/sources_1/new/top.v:86]
+INFO: [Synth 8-226] default block is never used [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.srcs/sources_1/new/top.v:99]
+INFO: [Synth 8-6157] synthesizing module 'div_clk' [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/div_clk.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'div_clk' (0#1) [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/div_clk.v:3]
+INFO: [Synth 8-6157] synthesizing module 'key' [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/key.v:3]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/key.v:50]
+INFO: [Synth 8-6155] done synthesizing module 'key' (0#1) [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/key.v:3]
+INFO: [Synth 8-6157] synthesizing module 'bin2bcd32' [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/bin2bcd32.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'bin2bcd32' (0#1) [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/bin2bcd32.v:2]
+INFO: [Synth 8-6157] synthesizing module 'seg_drive_8bit' [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/seg_drive_8bit.v:3]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/seg_drive_8bit.v:73]
+INFO: [Synth 8-6155] done synthesizing module 'seg_drive_8bit' (0#1) [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/seg_drive_8bit.v:3]
+INFO: [Synth 8-6157] synthesizing module 'freq_meter_calc' [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/freq_meter.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'freq_meter_calc' (0#1) [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/RTL/freq_meter.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'top' (0#1) [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.srcs/sources_1/new/top.v:3]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2287.535 ; gain = 505.785
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2305.453 ; gain = 523.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2305.453 ; gain = 523.703
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 2305.453 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.srcs/constrs_1/new/io.xdc]
+Finished Parsing XDC File [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.srcs/constrs_1/new/io.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.srcs/constrs_1/new/io.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2418.152 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 2418.152 ; gain = 0.000
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcsg324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'r_state_reg' in module 'key'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'bin2bcd32'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  l_idle |                              001 |                               00
+            l_delay_20ms |                              010 |                               01
+                   l_out |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'r_state_reg' using encoding 'one-hot' in module 'key'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  s_idle |                              001 |                               00
+                  s_busy |                              010 |                               01
+                   s_fin |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'bin2bcd32'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 3     
+	   2 Input   28 Bit       Adders := 4     
+	   3 Input   28 Bit       Adders := 1     
+	   2 Input   20 Bit       Adders := 2     
+	   2 Input    5 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 10    
+	   2 Input    3 Bit       Adders := 2     
++---Registers : 
+	               64 Bit    Registers := 1     
+	               48 Bit    Registers := 2     
+	               34 Bit    Registers := 1     
+	               32 Bit    Registers := 2     
+	               28 Bit    Registers := 6     
+	               20 Bit    Registers := 2     
+	                8 Bit    Registers := 2     
+	                5 Bit    Registers := 3     
+	                4 Bit    Registers := 11    
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 16    
++---Multipliers : 
+	              27x48  Multipliers := 1     
++---Muxes : 
+	   3 Input   32 Bit        Muxes := 1     
+	   2 Input   28 Bit        Muxes := 8     
+	   8 Input   24 Bit        Muxes := 1     
+	   2 Input   20 Bit        Muxes := 3     
+	   2 Input    5 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 11    
+	   3 Input    4 Bit        Muxes := 10    
+	   3 Input    3 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 2     
+	   6 Input    3 Bit        Muxes := 1     
+	   3 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 13    
+	   3 Input    1 Bit        Muxes := 7     
+	   9 Input    1 Bit        Muxes := 1     
+	  12 Input    1 Bit        Muxes := 1     
+	   7 Input    1 Bit        Muxes := 2     
+	   6 Input    1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP freq_reg1, operation Mode is: A*B.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+DSP Report: Generating DSP freq_reg1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+DSP Report: Generating DSP freq_reg1, operation Mode is: A*B.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+DSP Report: Generating DSP freq_reg1, operation Mode is: (PCIN>>17)+(A:0x1e100)*B.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+DSP Report: Generating DSP freq_reg1, operation Mode is: (A:0x1e100)*B.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+DSP Report: Generating DSP freq_reg1, operation Mode is: (PCIN>>17)+(A:0x1e100)*B.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+DSP Report: operator freq_reg1 is absorbed into DSP freq_reg1.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++----------------+--------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name     | DSP Mapping              | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++----------------+--------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|freq_meter_calc | A*B                      | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|freq_meter_calc | (PCIN>>17)+A*B           | 15     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|freq_meter_calc | A*B                      | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|freq_meter_calc | (PCIN>>17)+(A:0x1e100)*B | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|freq_meter_calc | (A:0x1e100)*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|freq_meter_calc | (PCIN>>17)+(A:0x1e100)*B | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++----------------+--------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:28 ; elapsed = 00:00:28 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:32 ; elapsed = 00:00:32 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:32 ; elapsed = 00:00:32 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:32 ; elapsed = 00:00:32 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:32 ; elapsed = 00:00:32 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++----------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name     | DSP Mapping  | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++----------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|freq_meter_calc | A*B          | 17     | 10     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|freq_meter_calc | PCIN>>17+A*B | 14     | 0      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|freq_meter_calc | A*B          | 17     | 10     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|freq_meter_calc | PCIN>>17+A*B | 17     | 14     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|freq_meter_calc | A*B          | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|freq_meter_calc | PCIN>>17+A*B | 0      | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++----------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |BUFG    |     2|
+|2     |CARRY4  |  1158|
+|3     |DSP48E1 |     6|
+|4     |LUT1    |   186|
+|5     |LUT2    |   314|
+|6     |LUT3    |  3801|
+|7     |LUT4    |   128|
+|8     |LUT5    |   106|
+|9     |LUT6    |   101|
+|10    |FDCE    |   566|
+|11    |FDPE    |    13|
+|12    |FDRE    |    32|
+|13    |IBUF    |     7|
+|14    |OBUF    |    24|
++------+--------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:32 ; elapsed = 00:00:32 . Memory (MB): peak = 2418.152 ; gain = 636.402
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:25 ; elapsed = 00:00:31 . Memory (MB): peak = 2418.152 ; gain = 523.703
+Synthesis Optimization Complete : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 2418.152 ; gain = 636.402
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.070 . Memory (MB): peak = 2418.152 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1164 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2418.152 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 8abbd54b
+INFO: [Common 17-83] Releasing license: Synthesis
+41 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 2418.152 ; gain = 1016.867
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.runs/synth_2/top.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sun Dec 10 14:25:42 2023...
