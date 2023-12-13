@@ -1,15 +1,11 @@
 Vivado Simulator v2023.1
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
-Running: E:/SoftWare/FPGA/Xilinx/Vivado/2023.1/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_div_behav xil_defaultlib.tb_div xil_defaultlib.glbl -log elaborate.log 
+Running: E:/SoftWare/FPGA/Xilinx/Vivado/2023.1/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'i_sw' [C:/Users/Maxwiny/Desktop/Project/Freq-Meter/Vivado/freq_meter/freq_meter.srcs/sources_1/new/top.v:122]
+WARNING: [VRFC 10-3091] actual bit length 28 differs from formal bit length 32 for port 'bin' [C:/Users/Maxwiny/Desktop/Project/Freq-Meter/Vivado/freq_meter/freq_meter.srcs/sources_1/new/top.v:138]
 Completed static elaboration
-Starting simulation data flow analysis
-Completed simulation data flow analysis
-Time Resolution for simulation is 1ps
-Compiling module xil_defaultlib.div_clk
-Compiling module xil_defaultlib.tb_div
-Compiling module xil_defaultlib.glbl
-Built simulation snapshot tb_div_behav
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel

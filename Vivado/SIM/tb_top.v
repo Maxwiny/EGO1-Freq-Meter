@@ -11,7 +11,8 @@ top u_top(
 	.i_key(),
 	.o_seg_pos(),
 	.o_seg1(),
-	.o_seg2()
+	.o_seg2(),
+	.i_sw(rstn)
 );
 //重定义软件闸门计数时间,缩短仿真时间
 defparam u_top.u_freq_meter_calc.CNT_GATE_S_MAX    = 240   ;    //计时最长时间  240X20ns

@@ -3,24 +3,24 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="C:/Users/Maxwiny/Desktop/Freq-Meter/Vivado/freq_meter/freq_meter.hw/hw_1/wave/hw_ila_data_1/hw_ila_data_1.wdb" id="1">
+      <db_ref path="C:/Users/Maxwiny/Desktop/Project/Freq-Meter/Vivado/freq_meter/freq_meter.hw/hw_1/wave/hw_ila_data_1/hw_ila_data_1.wdb" id="1">
          <top_modules>
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="42"></ZoomStartTime>
-      <ZoomEndTime time="36,093"></ZoomEndTime>
-      <Cursor1Time time="10,492"></Cursor1Time>
+      <ZoomStartTime time="1,157"></ZoomStartTime>
+      <ZoomEndTime time="12,438"></ZoomEndTime>
+      <Cursor1Time time="6,577"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="376"></NameColumnWidth>
-      <ValueColumnWidth column_width="134"></ValueColumnWidth>
+      <ValueColumnWidth column_width="129"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
    <wave_markers>
-      <marker time="707" label="" />
-      <marker time="246" label="" />
+      <marker time="10774" label="" />
+      <marker time="774" label="" />
    </wave_markers>
    <wvobject fp_name="o_div_clk" type="logic">
       <obj_property name="DisplayName">FullPathName</obj_property>
